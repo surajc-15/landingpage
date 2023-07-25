@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="output.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            margin-right: 4px;
+            background-color: rgb(217, 188, 134);
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 6px 10px;
+            text-decoration: none;
+            border-bottom: 1px solid yellow;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Position the image container (needed to position the left and right arrows) */
+        .container {
+            position: relative;
+            width: 70%;
+            margin: auto;
+        }
+
+        /* Hide the images by default */
+        .mySlides {
+            display: none;
+        }
+
+        /* Add a pointer when hovering over the thumbnail images */
+        .cursor {
+            cursor: pointer;
+        }
+
+        /* Next & previous buttons */
+        .prev,
+        .next {
+            cursor: pointer;
+            position: absolute;
+            top: 40%;
+            width: auto;
+            padding: 16px;
+            margin-top: -50px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* Position the "next button" to the right */
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        /* On hover, add a black background color with a little bit see-through */
+        .prev:hover,
+        .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Number text (1/3 etc) */
+        .numbertext {
+            color: #f2f2f2;
+            font-size: 12px;
+            padding: 8px 12px;
+            position: absolute;
+            top: 0;
+        }
+
+        /* Container for image text */
+        .caption-container {
+            text-align: center;
+            background-color: #222;
+            padding: 2px 16px;
+            color: white;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Six columns side by side */
+        .column {
+            float: left;
+            width: 16.66%;
+        }
+
+        /* Add a transparency effect for thumnbail images */
+        .demo {
+            opacity: 0.6;
+        }
+
+        .active,
+        .demo:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-700">
+    <!-- nav bar starts here -->
+    <nav class="flex w-full items-center h-16 bg-indigo-200 justify-between px-2 md:px-4">
+        <div>
+            <img class="rounded-full md:w-24 h-24" src="./assets/RVlogo.png" alt="" setsrc="">
+        </div>
+        <h2
+            class="text-white md:hidden text-4xl font-serif hover:text-blue-400 hover:border-b-2 border-yellow-300 hover:font-">
+            IEEE
+            WEBSITE
+        </h2>
+        <ul class="md:flex font-semibold hidden ">
+            <li class="mx-[10px] text-[20px] hover:border-b-2 border-blue-50"><a href="">Home</a></li>
+            <li class="mx-[10px] text-[20px] hover:border-b-2 border-blue-50"><a href="#">About</a></li>
+            <li class="mx-[10px] text-[20px] hover:border-b-2 border-blue-50"><a href="#">Commitee</a></li>
+            <li class="mx-[10px] text-[20px] hover:border-b-2 border-blue-50"><a href="#">Technical Program</a></li>
+            <li class="mx-[10px] text-[20px] hover:border-b-2 border-blue-50"><a href="#">Registration</a></li>
+            <li class="mx-[10px] text-[20px] hover:border-b-2 border-blue-50"><a href="#">Contact us</a></li>
+            <li class="mx-[10px] text-[20px] ml-2 bg-slate-50 border-2 border-white inline"><input
+                    class=" border-transparent hover:text-blue-300" type="search" placeholder="  search"
+                    id="searchbar"><i class="fa-solid fa-magnifying-glass w-"></i></li>
+        </ul>
+        <div class="hidden md:block px-2 py-2 font-bold cursor-pointer rounded-xl bg-indigo-700 text-white rounded">
+            Login/sign up
+        </div>
+        <!-- method to add dropdown list in mobile -->
+        <div class="dropdown md:hidden px-2  text-center text-2xl">
+            <button type="button" class="dropbtn px-2 rounded-lg text-2xl bg-gray-300 hover:bg-red-400">Menu
+                <span>&#8801</span>
+            </button>
+            <div class="dropdown-content hidden text-white z-1 hover:block">
+                <a href="#" class="block hover:bg-rose-200 text-blue-600">Home</a>
+                <a href="#" class="block hover:bg-rose-200 text-blue-600">About</a>
+                <a href="#" class="block hover:bg-rose-200 text-blue-600">Committee</a>
+                <a href="#" class="block hover:bg-rose-200 text-blue-600">Technical Program</a>
+                <a href="#" class="block hover:bg-rose-200 text-blue-600"> Registration</a>
+                <a href="#" class="block hover:bg-rose-200 text-blue-600">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+    <hr class="border-b-2 border-white mt-1">
+    <hr class="border-b-2 border-white mt-0.5">
+    <!-- nav bar ends here -->
+    <!-- header section starts here -->
+    <header class="bg-transparent">
+        <div class=" hidden md:w-full md:flex md:justify-between md:flex-wrap h-41 md:bg-slate-100">
+            <div>
+                <a href="https://www.ieee.org/" target="_blank"><img
+                        class=" w-[300px] h-[200px] object-contain p-4 mr-4" src="./assets/logo_IEEE_Main.png" alt=""
+                        setsrc=""></a>
+            </div>
+            <div>
+                <a href="https://ieeebangalore.org/" target="_blank"><img
+                        class=" hover:bg-transparent mt-11 p-5 w-[300px] h-[200pxobject-contain"
+                        src="./assets/logo_IEEE_Banaglaore_Section.png" alt="" setsrc=""></a>
+            </div>
+            <div>
+                <a href="https://csitss.ieee-rvce.org/" target="_blank"><img
+                        class=" mt-16 mr-4 w-[300px] h-[200pxobject-contain" src="./assets/logo_rvce_ieee.png" alt=""
+                        setsrc=""></a>
+            </div>
+        </div>
+        <div class="m-auto w-[80%] h-auto ">
+            <div class="text-white flex flex-col text-center  mt-8">
+                <div class="flex flex-wrap justify-center">
+                    <!-- <img src="image1.avif" alt=""> -->
+                    <h1
+                        class="tracking-wide  font-semibold italic ml-0  mt-32  mr-12 z-2 text-6xl text-transparent bg-gradient-to-r from-indigo-50 to-orange-500 bg-clip-text ">
+                        EXPLORE THE WORLD </h1>
+                    <video class=" h-[300px] w-auto hover:border-2 hover:border-white hover:p-2 rounded-lg"
+                        src="assets/AdobeStock_620287729_Video_HD_Preview.mov" autoplay muted loop></video>
+                </div>
+                <br>
+                <div class="space-x-2 space-y-2.5 mt-1 tracking-wide ">
+                    <h2
+                        class="mainh text-4xl font-extrabold text-transparent bg-gradient-to-r from-orange-100 to-orange-900 bg-clip-text">
+                        WELCOME TO CSITSS -2023</h2>
+                    <p class="from-neutral-800  text-xl font-semibold">7th International Conference on
+                        Computational
+                        Systems
+                        and
+                        Information Technology for Sustainable
+                        Solutions</p>
+                    <p class="font-sans  text-lg font-semibold">Conference Record #60515</p>
+                    <p class="font-sans font-semibold">Organized by</p>
+                    <p class="font-bold space-x-1 text-center text-xl text-slate-50">RV College of Engineering®</p>
+                </div>
+                <br>
+                <div class="text-white-600  flex justify-evenly ml-4 mr-4  m-4">
+                    <div
+                        class="bg-blue-700  p-2 rounded-xl text-white hover:bg-white hover:border-2 hover:text-blue-800 border-red-500">
+                        <a href="https://cmt3.research.microsoft.com/User/Login?ReturnUrl=%2FCSITSS2023"
+                            target="_blank"> <i class="fa-solid fa-paper-plane"></i> SUBMIT PAPER</a>
+                    </div>
+                    <div
+                        class="bg-blue-700  p-2 rounded-xl text-white hover:bg-white hover:border-2 hover:text-blue-800 border-red-500 ">
+                        <a href="#" target="_blank">TIMELINE</a>
+                    </div>
+                    <div
+                        class="bg-blue-700  p-2 rounded-xl text-white hover:bg-white hover:border-2 hover:text-blue-800 border-red-500">
+                        <a href="#" download="#">DOWNLOAD
+                            BROCHURE <i class="fa-solid fa-cloud-arrow-down"></i></a>
+                    </div>
+                </div>
+            </div>
+    </header>
+    <!-- header ends here -->
+
+    <!-- about us -->
+    <div class=" grid grid-cols-2 gap-4  bg-cyan-100 place-content-between m-auto">
+        <div class="m-auto text-xl text-start p-6 hover:bg-slate-100 hover:text-blue-700">
+            <h1 class="text-4xl font-extrabold text-indigo-600">About CSITSS</h1>
+            <p class="mt-6">
+                The 7th International Conference on "Computational Systems and
+                Information Technology for Sustainable
+                Solutions [CSITSS — 2023]" focuses on bringing together leading academicians, scientists,
+                researchers,
+                industry representatives, postdoctoral fellows and research scholars around the world to share their
+                knowledge and research expertise in Renewable Energy, Robotics, Computing, Communication,
+                E-mobility,
+                Embedded Systems, (R2C2E2) from 2nd to 4th, November 2023.
+            </p>
+        </div>
+        <div class="flex flex-col mt-20 px-4 mx-auto hover:bg-slate-100">
+            <h1
+                class=" md:text-3xl font-serif font-bold text-transparent bg-gradient-to-r from-yellow-200 to-red-800 bg-clip-text">
+                In association with</h1>
+            <br>
+            <img src="./assets/fiu-logo.png" alt="">
+            <br>
+            <br>
+            <br>
+            <h1
+                class=" md:text-3xl font-serif font-bold text-transparent bg-gradient-to-r from-yellow-200 to-red-800 bg-clip-text">
+                Technically sponsered by</h1>
+            <br>
+            <img src="./assets/logo_IEEE_Banaglaore_Section.png" alt="">
+        </div>
+    </div>
+    <!-- about us section ends here -->
+    <!-- timeliness -->
+    <div class="bg-slate-50 p-4">
+        <h1 CLASS="text-transparent  bg-gradient-to-r from-black to bg-blue-500 bg-clip-text text-center text-4xl "><i
+                class="fa-solid fa-calendar-days"></i> TIMELINES</i>
+        </h1>
+        <div class="h-auto w-full flex justify-center items-center mt-2">
+            <div class="max-w-7xl mx-auto w-full grid grid-cols-9">
+                <!-- 1st event -->
+                <div class="col-span-4 w-full ">
+                    <div class="w-full h-full bg-indigo-400 rounded-md">
+                        <h1 class="text-white text-xl font-medium py-2">Title 1</h1>
+                        <p class=" text-gray-100 sm:text-sm text-xs ">Lorem, ipsum dolor.</p>
+                    </div>
+                </div>
+                <div class="col-span-1 relative w-full h-full flex justify-center items-center">
+                    <div class="h-full w-1 bg-gray-600"></div>
+                    <div class=" absolute w-6 h-6 rounded-full bg-green-400  z-10 text-white text-center"><i
+                            class="fa-solid fa-message"></i></i></div>
+                </div>
+                <div class="col-span-4 w-full h-full">
+                </div>
+                <!-- event 2 -->
+                <div class="col-span-4 w-full h-full"></div>
+                <div class="col-span-1 relative w-full h-full flex justify-center items-center">
+                    <div class="h-full w-1 bg-gray-600"></div>
+                    <div class=" absolute w-6 h-6 rounded-full bg-green-400  z-10 text-white text-center"><i
+                            class="fa-solid fa-message"></i></i></div>
+                </div>
+                <div class="col-span-4 w-full h-full">
+                    <div class="w-full h-full bg-indigo-400 rounded-md">
+                        <h1 class="text-white text-xl font-medium py-2">Title 2</h1>
+                        <p class=" text-gray-100 sm:text-sm text-xs ">Lorem, ipsum dolor.</p>
+                    </div>
+                </div>
+                <!-- event 3 -->
+                <div class="col-span-4 w-full ">
+                    <div class="w-full h-full bg-blue-500 rounded-md">
+                        <h1 class="text-white text-xl font-medium py-2">Title 3</h1>
+                        <p class=" text-gray-100 sm:text-sm text-xs ">Lorem, ipsum dolor.</p>
+                    </div>
+                </div>
+                <div class="col-span-1 relative w-full h-full flex justify-center items-center">
+                    <div class="h-full w-1 bg-gray-600"></div>
+                    <div class=" absolute w-6 h-6 rounded-full bg-green-400  z-10 text-white text-center"><i
+                            class="fa-solid fa-message"></i></div>
+                </div>
+                <div class="col-span-4 w-full h-full">
+                </div>
+
+                <!-- event 4 -->
+                <div class="col-span-4 w-full h-full"></div>
+                <div class="col-span-1 relative w-full h-full flex justify-center items-center">
+                    <div class="h-full w-1 bg-gray-600"></div>
+                    <div class=" absolute w-6 h-6 rounded-full bg-green-400 z-10 text-white text-center"><i
+                            class="fa-solid fa-message"></i></div>
+                </div>
+                <div class="col-span-4 w-full h-full">
+                    <div class="w-full h-full bg-blue-500 rounded-md">
+                        <h1 class="text-white text-xl font-medium py-2">Title 4</h1>
+                        <p class=" text-gray-100 sm:text-sm text-xs "> Lorem ipsum dolor sit amet consectetur
+                            adipisicing elit. Aut, i
+                            .</p>
+                    </div>
+                </div>
+                <!-- event 5 -->
+                <div class="col-span-4 w-full ">
+                    <div class="w-full h-full bg-indigo-400 rounded-md">
+                        <h1 class="text-white text-xl font-medium py-2">Title 5</h1>
+                        <p class=" text-gray-100 sm:text-sm text-xs ">Lorem, ipsum dolor.</p>
+                    </div>
+                </div>
+                <div class="col-span-1 relative w-full h-full flex justify-center items-center">
+                    <div class="h-full w-1 bg-gray-600"></div>
+                    <div class=" absolute w-6 h-6 rounded-full bg-green-400  z-10 text-white text-center"><i
+                            class="fa-solid fa-message"></i></div>
+                </div>
+                <div class="col-span-4 w-full h-full">
+                </div>
+                <!-- do the alternative div copy paste to get subsequent event list -->
+            </div>
+        </div>
+    </div>
+    <!-- timeline ends here -->
+    <br>
+    <hr class="">
+    <!--timeline -->
+    <div>
+        <div class="text-center text-white text-3xl font-semibold">Google Map <i
+                class="fa-solid fa-location-crosshairs"></i></div>
+        <div class="grid place-content-evenly w-full grid-cols-6 gap-4">
+
+            <div class="">
+                <img class=" colspan-1 rounder-full" src="./assets/RVlogo.png" alt="">
+            </div>
+            <div class="col-span-1 text-2xl text-white mt-6">
+                <h4 class="border-b-2 border-white inline">Address</h4>
+                <p class="mt-3">R V COLLEGE OF ENGINEERING </p>
+                <p>Near Mysore Road Pattanagere</p>
+                <p>Bangalore</p>
+
+            </div>
+            <div>
+
+                <iframe class="rounded-xl  m-2 p-2 border-3 "
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d248952.03969690882!2d77.22114763657196!3d12.851309146020844!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae3ee159ba3729%3A0x75a3463d510cf26e!2sR.%20V.%20College%20of%20Engineering!5e0!3m2!1sen!2sin!4v1690133812971!5m2!1sen!2sin"
+                    width="900" height="400" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+
+        </div>
+    </div>
+    <!-- map location is addded -->
+    <!-- Container for the image gallery -->
+    <div class="bg-indigo-300 p-1">
+        <h1 class="italic font-bold text-4xl m-6 hover:border-b-3 hover:border-double hover:border-white">Image Gallery
+        </h1>
+        <div class="container mt-2 p-4 text-xl font-semibold">
+            <!-- Full-width images with number text -->
+            <div class="mySlides">
+                <div class="numbertext">1 / 6</div>
+                <img src="./assets/bg-image.jpg" style="width:100%; height:400px">
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">2 / 6</div>
+                <img src="./assets/image2.jpeg" style="width:100%;  height:400px">
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">3 / 6</div>
+                <img src="./assets/image3.jpeg" style="width:100%;  height:400px">
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">4 / 6</div>
+                <img src="./assets/image4.jpeg" style="width:100%;  height:400px">
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">5 / 6</div>
+                <img src="./assets/image7.jpeg" style="width:100%;  height:400px">
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">6 / 6</div>
+                <img src="./assets/image8.JPG" style="width:100%;  height:400px">
+            </div>
+            <!-- Next and previous buttons -->
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+            <!-- Image text -->
+            <div class="caption-container">
+                <p id="caption"></p>
+            </div>
+            <!-- Thumbnail images -->
+            <div class="row">
+                <div class="column">
+                    <img class="demo cursor" src="./assets/bg-image.jpg" style="width:100%" onclick="currentSlide(1)" alt="">
+                </div>
+                <div class="column">
+                    <img class="demo cursor" src="./assets/image2.jpeg" style="width:100%" onclick="currentSlide(2)" alt="">
+                </div>
+                <div class="column">
+                    <img class="demo cursor" src="./assets/image3.jpeg" style="width:100%" onclick="currentSlide(3)" alt="">
+                </div>
+                <div class="column">
+                    <img class="demo cursor" src="./assets/image4.jpeg" style="width:100%" onclick="currentSlide(4)" alt="">
+                </div>
+                <div class="column">
+                    <img class="demo cursor" src="./assets/image7.jpeg" style="width:100%" onclick="currentSlide(5)" alt="">
+                </div>
+                <div class="column">
+                    <img class="demo cursor" src="./assets/image8.JPG" style="width:100%" onclick="currentSlide(6)" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- image section ends here -->
+
+    <!-- contact page -->
+
+
+
+    <!-- footer design start -->
+    <hr class="border-2 border-dashed border-red-600">
+    <footer class="bg-slate-100">
+        <div class="flex flex-wrap w-full h-[150px] justify-between overflow-hidden">
+            <div class="bg:gray-300">
+                <a href="https://www.rvce.edu.in/"><img class=" rounded-full  float-left w-[200px] h-[200px]"
+                        src="./assets/RVlogo.png" alt=""></a>
+                <h2 class="mt-16 font-bold">R V COLLEGE OF ENGINEERING BANGALORE</h2>
+            </div>
+            <div class="mt-5">
+                <img src="./assets/GO-CHANGE-THE-WORLD.png" alt="">
+            </div>
+
+            <div class="mt-5">
+                <img src="./assets/logo_rvce_ieee.png" alt="">
+            </div>
+        </div>
+
+        <div
+            class="w-full bg-grey-900 font-semibold px-4 t text-gray-600  pt-8 flex flex-col md:flex-row flex-wrap justify-between md:px-12">
+            <div>
+                <img class=" w-44 h-20" src="./assets/RVCE NEW-HEADER.png" alt="">
+                <p class="my-4">Email us: support@.com</p>
+                <img class="h-32 w-32 object-contain" src="./assets/logo_rvce_ieee.png" alt="">
+            </div>
+            <div>
+                <h2 class="font-bold text-xl mt-4">CSITSS</h2>
+                <div class="w-32 border-yellow-400 border-b-2 rounded-xl my-2"></div>
+                <div>
+                    <p><i class="fa-solid fa-circle-chevron-right"></i> About us</p>
+                    <p><i class="fa-solid fa-circle-chevron-right"></i> FAQ'S</p>
+                    <p><i class="fa-solid fa-circle-chevron-right"></i> Privacy Policy</p>
+                </div>
+            </div>
+            <div>
+                <h2 class="font-bold text-xl mt-4">IEEE</h2>
+                <div class="w-32 border-yellow-400 border-b-2 rounded-xl my-2"></div>
+                <div>
+                    <p><i class="fa-solid fa-circle-chevron-right"></i> Resources</p>
+                    <p><i class="fa-solid fa-circle-chevron-right"></i> Papers</p>
+                    <p><i class="fa-solid fa-circle-chevron-right"></i> Membership</p>
+                </div>
+            </div>
+            <div>
+                <h2 class="font-bold text-xl mt-4">Connect with us</h2>
+                <div class="w-32 border-yellow-400 border-b-2 rounded-xl my-2"></div>
+                <div>
+                    <p class="font-700"><i class="fa-brands fa-instagram h-6 w-5 font-bold"></i> Instagram</p>
+                    <p class="font-700"><i class="fa-brands fa-linkedin h-6 w-5 font-bold"></i> LinkedIn</p>
+                    <p class="font-700"><i class="fa-brands fa-twitter h-6 w-5 font-bold"></i> Twitter</p>
+                </div>
+            </div>
+            <div>
+                <h2 class="font-bold text-xl mt-4">Links</h2>
+                <div class="w-32 border-yellow-400 border-b-2 rounded-xl my-2"></div>
+                <div class="text-gray-950">
+                    <p><a href="#"><i class="fa-solid fa-circle-chevron-right"></i> IEEE MAIN</a></p>
+                    <p><a href=""><i class="fa-solid fa-circle-chevron-right"></i> IEEE Bangalore section</a></p>
+                    <p><a href="#"><i class="fa-solid fa-circle-chevron-right"></i> Careers</a></p>
+                </div>
+            </div>
+            <div claass="bg-slate-50 p-8 m-8 border-3 border-blue-600 ">
+                <h1
+                    class="text-3xl text-center bg-gradient-to-r font-bold italic from-blue-200 to-blue-700 text-transparent  bg-clip-text ">
+                    Contact Us</h1>
+                <div class="w-37 border-yellow-400 border-b-2 rounded-xl my-2 mx-auto"></div>
+                <div class="flex flex-col justify-center items-center mt-4 text-start border-3  border-blue-600 px-2">
+                    <form action="" class="hover:bg-slate-300 rounded-lg px-3">
+                        <div class="mt-2 ">
+                            <h2 class=" italic">Name</h2>
+                            <input class="border-b-2 bg-transparent text-left  border-blue-600 text-blue " type="text"
+                                id="name" required>
+                        </div>
+                        <div class="mt-2 ">
+
+                            <h2 class=" italic">Email</h2>
+                            <input class="border-b-2 bg-transparent text-left border-blue-600 text-blue " type="email"
+                                id="email" required>
+                        </div>
+                        <div class="mt-2 ">
+                            <h2 class="italic ">Messege</h2>
+                            <textarea class="border-2 mt-2 bg-transparent border-blue-600 text-blue " name="querry"
+                                id="messege" cols="30" rows="5" placeholder="type your messsege"></textarea>
+                        </div>
+                        <div class="mt-2 ">
+                            <button
+                                class=" border-2 w-24 rounded-xl mb-2 text-center border-black bg-indigo-300 hover:border-blue-800  hover:bg-slate-50"
+                                type="submit">SUBMIT <i class="fa-solid fa-paper-plane"></i></button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <hr class="border-2 border-black px-2 ">
+        <hr class="border-2 border-black px-2  mt-1">
+        <div class="flex flex-wrap justify-center  gap-5 p-3 bg-indigo-500 text-white overflow-hidden">
+            <a class="text-xl font-semibold " href="home.html">Home</a>
+            <a class="text-xl font-semibold " target="_blank"
+                href="https://www.google.com/maps/place/R.+V.+College+of+Engineering/@12.9237228,77.4961263,17z/data=!3m1!4b1!4m6!3m5!1s0x3bae3ee159ba3729:0x75a3463d510cf26e!8m2!3d12.9237228!4d77.4987012!16zL20vMDQybG5k?authuser=0&entry=ttu">location</a>
+            <a class="text-xl font-semibold " href="">policy</a>
+            <a class="text-xl font-semibold " href="">contact & support</a>
+            <a class="text-xl font-semibold " href="">Terms</a>
+            <a class="text-xl font-semibold " href="feedback.html">Feedback</a>
+            <a class="text-xl font-semibold " href=""><i class="fa-solid fa-arrow-up"></i>TOP</a>
+        </div>
+        <div class="bg-indigo-500 text-slate-700 italic font-semibold text-center text-xl "><i
+                class="fa-solid fa-copyright"></i> 2023 CSITSS IEEE RVCE. All Rights Reserved</div>
+        <div CLASS="float-right text-white mr-6">
+            Developed by:<p>SURAJ C</p>
+        </div>
+
+    </footer>
+    <!-- footer ends here -->
+</body>
+<script>
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    // Next/previous controls
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    // Thumbnail image controls
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("demo");
+        let captionText = document.getElementById("caption");
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length } for (i = 0; i < slides.length; i++) { slides[i].style.display = "none"; } for (i = 0; i
+            < dots.length; i++) { dots[i].className = dots[i].className.replace(" active", ""); }
+        slides[slideIndex - 1].style.display = "block"; dots[slideIndex - 1].className += " active";
+        captionText.innerHTML = dots[slideIndex - 1].alt;
+    } 
+</script>
+
+</html>
